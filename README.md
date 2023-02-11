@@ -11,4 +11,11 @@ Please follow these links:
 
 After doing that you should be able to clone thw whole codebase hosted here.
 
+## About the system
+
+We'd like to implement an old style peer to peer system composed by an indexing server and multiple clients acting as peers.
+Indexing server will be used just as central storing system by all peers in order to make queries and searching for a specif filename. A server response will produce enough informations for a peer in order to contact peers that really host that searched filename so downloading operations will be handled by peers that will act as client in search operations and as a server after being contacted by a peer for getting a file.
+
+
+
 
