@@ -61,7 +61,7 @@ Indexing server will be used just as central storing system by all peers in orde
 
 * Keep Alive
   ```
-  After login call a peer must send a keep alive call to maintain its online status in-
+  After a login call a peer must send a keep alive call to maintain its online status in-
   side the network
   ```
 
@@ -70,7 +70,32 @@ Indexing server will be used just as central storing system by all peers in orde
   A peer before quitting must send a logout call to set itself as offline
   ```
 
+* Show Peers
+  ```
+  Show online/offline/all peers
+  ```
+  
+* Browse Peer
+  ```
+  Show all the indexes for a peer. In other words, show all the shared files of current peer in the network
+  1. filename
+  2. dimension
+  3. sha1
+  ```
+  
 ## About peers
+
+* Register
+
+* Login
+
+* Keep Alive
+
+* Logout
+
+* Search
+
+* Download
 
 
 
