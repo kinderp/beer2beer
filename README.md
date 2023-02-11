@@ -21,22 +21,22 @@ Indexing server will be used just as central storing system by all peers in orde
 * Register and Indexing
   ```
   Each peer needs to announce itself to the indexing server with a register call.
-  During current process a peer must comunicate to the server all the files that 
+  During current process a peer must communicate to the server all the files that 
   it wants to share with all the other peers.
-  This list must provide for each file the following informations:
+  For each file in this list it must provide the following informations:
   
   1. filename
   2. dimension in Mb
   3. sha1
   
-  As a result of this registration process an unique id will be realeaded by server
+  As a result of this registration process an unique id will be released by server
   to current peer. Peer will use this id in login call. A login call to indexing se-
   rver is mandatory each time a registered peer wants to connect to the network.
   Peer's id will be used as key in server's index and as identifier for  a peer  in 
   the network.
   
   A peer can't interact with another peer in the network if it didn't make  a login 
-  call.
+  call (in other words its status is set to offline).
   
   Each registration has a TTL (time to live).
   TTL works in this way: it is set to 30 days but it is refreshed each time current
@@ -44,8 +44,8 @@ Indexing server will be used just as central storing system by all peers in orde
   call in 30 days.
   
   If a peer needs to update its list, it must perform a new registration call (inclu
-  ding its old id). A new fresh id will be released and the old one will be deleted
-  with the old indexes for the current peer.
+  ding its old id in the request). A new fresh id will be released and  the  old one 
+  will be deleted together with the old indexes for the current peer.
   ```
 
 * Login
