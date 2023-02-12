@@ -19,9 +19,9 @@ class Server:
 
     def handle(self, new_sock, address):
         while True:
-            first_chunk = new_sock.recv(1) # read first byte (payload len)
+            first_chunk = new_sock.recv(2) # read first 2 bytes (payload len)
             if not first_chunk: break
-            second_chunk = new_sock.recv(1) # read second byte (type of mes)
+            second_chunk = new_sock.recv(2) # read second 2 bytes (type of mes)
             payload_len = int.from_bytes(first_chunk, "little")
             type_of_message = int.from_bytes(second_chunk, "little")
             payload = new_sock.recv(payload_len)
