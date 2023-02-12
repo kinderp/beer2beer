@@ -1,6 +1,10 @@
 from concurrent import futures as cf
 import socket
 
+from util.session import Session
+from message.messages_factory import MessagesFactory
+from message.messages_codes import LOGIN, LOGIN_OK, LOGIN_KO
+
 
 class Server:
     def __init__(self, host='localhost', port=8888, queue=5, threads=20):
@@ -17,24 +21,26 @@ class Server:
         print("[*] queue = {}".format(queue))
         print("[*] thread = {}".format(threads))
 
-    def handle(self, new_sock, address):
+    def handle(self, new_session):
         while True:
-            first_chunk = new_sock.recv(2) # read first 2 bytes (payload len)
-            if not first_chunk: break
-            second_chunk = new_sock.recv(2) # read second 2 bytes (type of mes)
-            payload_len = int.from_bytes(first_chunk, "little")
-            type_of_message = int.from_bytes(second_chunk, "little")
-            payload = new_sock.recv(payload_len)
-            print(payload.decode('utf-8'))
-        new_sock.close()
-        print("[*] Disconnected from ", address)
+            message_from_peer = new_session.recv_message()
+            if not message_from_peer: break
+            # process message from peer (decode and do some actions) and sent 
+            # back a response
+            output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
+            output_message.set_payload()
+            output_message.set_header()
+            new_session.send_message(output_message)
+        new_session.disconnect()
+        print("[*] Disconnected sesssion")
 
     def run(self):
         with cf.ThreadPoolExecutor(self._threads) as e:
             try:
                 while True:
                     new_sock, address = self._servsock.accept()
-                    e.submit(self.handle, new_sock, address)
+                    new_session = Session(host=None, port=None, sock=new_sock)
+                    e.submit(self.handle, new_session)
             except KeyboardInterrupt:
                 pass
             finally:
