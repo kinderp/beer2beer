@@ -40,7 +40,5 @@ if __name__ == "__main__":
                     message_type=LOGIN, 
                     data="user\npassword\n1234"
                   )
-        message.set_payload()
-        message.set_header()
         server_response = p.send_message(message)
         print(server_response._data)

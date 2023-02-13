@@ -4,6 +4,8 @@ from .message import Message
 class MessageBase(Message):
     def __init__(self, mtype,  data):
         super().__init__(mtype, data)
+        self.set_payload()
+        self.set_header()
 
     def get_payload(self):
         pass

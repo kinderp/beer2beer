@@ -28,8 +28,6 @@ class Server:
             # process message from peer (decode and do some actions) and sent 
             # back a response
             output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
-            output_message.set_payload()
-            output_message.set_header()
             new_session.send_message(output_message)
         new_session.disconnect()
         print("[*] Disconnected sesssion")
