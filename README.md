@@ -37,7 +37,9 @@ Please, see down below table for informations about payload contents of each mes
 | message type      | payload                                                                          |
 | ----------------- |----------------------------------------------------------------------------------|
 | **LOGIN**         | ```username\npassword\nid```                                                     |
-| **REGISTER**      | ```id\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1``` |
+| **REGISTER**      | ```id\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1```     |
+| **KEEP_ALIVE**    | ```id```                                                                         |
+
 
 
 ### Server
@@ -48,6 +50,8 @@ Please, see down below table for informations about payload contents of each mes
 | **LOGIN_KO**        | ```Insert here a description of error occurred on the server side``` |
 | **REGISTER_OK**     | ```REGISTER SUCCES```    |
 | **REGISTER_KO**     | ```Insert here a description of error occurred on the server side``` |
+| **KEEP_ALIVE_OK**   | ```KEEP ALIVE SUCCESS``` |
+| **KEEP_ALIVE_KO**   | ```Insert here a description of error occurred on the server side``` |
 
 ## About server
 
