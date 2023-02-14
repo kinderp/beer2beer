@@ -88,8 +88,14 @@ Indexing server will be used just as central storing system by all peers in orde
 * Register
 
 * Login
+  ```
+  username\npassword\nid
+  ```
 
 * Keep Alive
+  ```
+  id
+  ```
 
 * Logout
 
