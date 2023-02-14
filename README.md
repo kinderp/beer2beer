@@ -29,7 +29,25 @@ Each message exchanged between server and peers will be composed by two parts: `
 +----------------+-----------------+
 ```
 
-**payload** is just a string encoded with **utf-8** charset.
+**payload** is just a string encoded with **utf-8** charset. Payload depends on the type of message.
+Please, see down below table for informations about payload contents of each message.
+
+
+### Client
+| message type      | payload                                                                          |
+| ----------------- |----------------------------------------------------------------------------------|
+| **LOGIN**         | ```username\npassword\nid```                                                     |
+| **REGISTER**      | ```id\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1``` |
+
+
+### Server
+
+| message type        | payload                  |
+| ------------------- |--------------------------|
+| **LOGIN_OK**        | ```LOGIN SUCCESS```      |
+| **LOGIN_KO**        | ```Insert here a description of error occurred on the server side``` |
+| **REGISTER_OK**     | ```REGISTER SUCCES```    |
+| **REGISTER_KO**     | ```Insert here a description of error occurred on the server side``` |
 
 ## About server
 
@@ -63,8 +81,13 @@ Each message exchanged between server and peers will be composed by two parts: `
   will be deleted together with the old indexes for the current peer.
   ```
   
+  payload response
+  ```
+  LOGIN_OK
   ```
   
+  ```
+  LOGIN_KO
   ```
 
 * Login
