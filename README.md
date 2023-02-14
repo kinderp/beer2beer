@@ -37,7 +37,7 @@ Please, see down below table for informations about payload contents of each mes
 | message type      | payload                                                                          |
 | ----------------- |----------------------------------------------------------------------------------|
 | **LOGIN**         | ```username\npassword\nid```                                                     |
-| **REGISTER**      | ```id\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1```     |
+| **REGISTER**      | ```usernmae\npassword\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1```|    
 | **KEEP_ALIVE**    | ```id```                                                                         |
 
 
