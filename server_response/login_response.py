@@ -1,9 +1,9 @@
-from .strategy import Strategy
+from .server_response import ServerResponse
 from message.messages_codes import LOGIN, LOGIN_OK, LOGIN_KO
 from message.messages_factory import MessagesFactory
 
 
-class LoginStrategy(Strategy):
+class LoginResponse(ServerResponse):
     def __init__(self, message):
         super().__init__(message)
 

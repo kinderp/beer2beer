@@ -2,7 +2,7 @@ from concurrent import futures as cf
 import socket
 
 from util.session import Session
-from strategy.strategies_factory import StrategiesFactory
+from server_response.server_responses_factory import ServerResponsesFactory
 
 
 class Server:
@@ -26,7 +26,7 @@ class Server:
             if not message_from_peer: break
             # process message from peer (decode and do some actions) and sent 
             # back a response
-            current_strategy = StrategiesFactory.create(message_from_peer)
+            current_strategy = ServerResponsesFactory.create(message_from_peer)
             output_message = current_strategy.reply()
             new_session.send_message(output_message)
         new_session.disconnect()

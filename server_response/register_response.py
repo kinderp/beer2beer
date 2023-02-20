@@ -1,9 +1,9 @@
-from .strategy import Strategy
+from .server_response import ServerResponse
 from message.messages_codes import REGISTER, REGISTER_OK, REGISTER_KO
 from message.messages_factory import MessagesFactory
 
 
-class RegisterStrategy(Strategy):
+class RegisterResponse(ServerResponse):
     def __init__(self, message):
         super().__init__(message)
 

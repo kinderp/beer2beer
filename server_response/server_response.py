@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-class Strategy:
+class ServerResponse:
     __metaclass__ = ABCMeta
 
     def __init__(self, message):
