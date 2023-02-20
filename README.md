@@ -16,6 +16,43 @@ After doing that you should be able to clone thw whole codebase hosted here.
 We'd like to implement an old style peer to peer system composed by an indexing server and multiple clients acting as peers.
 Indexing server will be used just as central storing system by all peers in order to make queries and searching for a specif filename. A server response will produce enough informations for a peer in order to contact peers that really host that searched filename so downloading operations will be handled by peers that will act as client in search operations and as a server after being contacted by a peer for getting a file.
 
+## About Protocol
+
+Each message exchanged between server and peers will be composed by two parts: `header` + `payload`
+
+**header** is built in this way:
+
+```
++----------------+-----------------+
+| payload length | type of message |
+| (in bytes)     | (in bytes)      |
++----------------+-----------------+
+```
+
+**payload** is just a string encoded with **utf-8** charset. Payload depends on the type of message.
+Please, see down below table for informations about payload contents of each message.
+
+
+### Client
+| message type      | payload                                                                          |
+| ----------------- |----------------------------------------------------------------------------------|
+| **LOGIN**         | ```username\npassword\nid```                                                     |
+| **REGISTER**      | ```usernmae\npassword\nfilename1\|dimension_in_mb\|sha1\nfilename2\|dimension_in_mb\|sha1```|    
+| **KEEP_ALIVE**    | ```id```                                                                         |
+
+
+
+### Server
+
+| message type        | payload                  |
+| ------------------- |--------------------------|
+| **LOGIN_OK**        | ```LOGIN SUCCESS```      |
+| **LOGIN_KO**        | ```Insert here a description of error occurred on the server side``` |
+| **REGISTER_OK**     | ```REGISTER SUCCES```    |
+| **REGISTER_KO**     | ```Insert here a description of error occurred on the server side``` |
+| **KEEP_ALIVE_OK**   | ```KEEP ALIVE SUCCESS``` |
+| **KEEP_ALIVE_KO**   | ```Insert here a description of error occurred on the server side``` |
+
 ## About server
 
 * Register and Indexing
@@ -46,6 +83,15 @@ Indexing server will be used just as central storing system by all peers in orde
   If a peer needs to update its list, it must perform a new registration call (inclu
   ding its old id in the request). A new fresh id will be released and  the  old one 
   will be deleted together with the old indexes for the current peer.
+  ```
+  
+  payload response
+  ```
+  LOGIN_OK
+  ```
+  
+  ```
+  LOGIN_KO
   ```
 
 * Login
@@ -86,12 +132,29 @@ Indexing server will be used just as central storing system by all peers in orde
 ## About peers
 
 * Register
+  ```
+  username
+  password
+  filename1|dimension|sha1
+  filename2|dimension|sha1
+  ...
+  filenameN|dimension|sha1
+  ```
 
 * Login
+  ```
+  username\npassword\nid
+  ```
 
 * Keep Alive
+  ```
+  id
+  ```
 
 * Logout
+  ```
+  username\npassword\id
+  ```
 
 * Search
 

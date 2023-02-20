@@ -2,8 +2,7 @@ from concurrent import futures as cf
 import socket
 
 from util.session import Session
-from message.messages_factory import MessagesFactory
-from message.messages_codes import LOGIN, LOGIN_OK, LOGIN_KO
+from strategy.strategies_factory import StrategiesFactory
 
 
 class Server:
@@ -27,7 +26,8 @@ class Server:
             if not message_from_peer: break
             # process message from peer (decode and do some actions) and sent 
             # back a response
-            output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
+            current_strategy = StrategiesFactory.create(message_from_peer)
+            output_message = current_strategy.reply()
             new_session.send_message(output_message)
         new_session.disconnect()
         print("[*] Disconnected sesssion")
