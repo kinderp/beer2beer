@@ -4,6 +4,9 @@ import socket
 from util.session import Session
 from server_response.server_responses_factory import ServerResponsesFactory
 
+from settings import LoggerSettings
+
+from . import LOGGER
 
 class Server:
     def __init__(self, host='localhost', port=8888, queue=5, threads=20):
@@ -15,12 +18,15 @@ class Server:
         self._servsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._servsock.bind((self._host,self._port))
         self._servsock.listen(self._queue)
-        print("[*] Starting Indexing Server...")
-        print("[*] Serving at {}".format(self._servsock.getsockname()))
-        print("[*] queue = {}".format(queue))
-        print("[*] thread = {}".format(threads))
+        LOGGER.info("Starting Indexing Server...")
+        LOGGER.info("[*]")
+        LOGGER.info("[*] Serving at {}".format(self._servsock.getsockname()))
+        LOGGER.info("[*] queue => {}".format(queue))
+        LOGGER.info("[*] thread => {}".format(threads))
+        LOGGER.info("[*]")
 
-    def handle(self, new_session):
+    def handle(self, new_session, address):
+        LOGGER.info("[<-] Opened - Session - {} ".format(address))
         while True:
             message_from_peer = new_session.recv_message()
             if not message_from_peer: break
@@ -30,7 +36,7 @@ class Server:
             output_message = current_strategy.reply()
             new_session.send_message(output_message)
         new_session.disconnect()
-        print("[*] Disconnected sesssion")
+        LOGGER.info("[<-] Closed - Session - {}".format(address))
 
     def run(self):
         with cf.ThreadPoolExecutor(self._threads) as e:
@@ -38,7 +44,7 @@ class Server:
                 while True:
                     new_sock, address = self._servsock.accept()
                     new_session = Session(host=None, port=None, sock=new_sock)
-                    e.submit(self.handle, new_session)
+                    e.submit(self.handle, new_session, address)
             except KeyboardInterrupt:
                 pass
             finally:
