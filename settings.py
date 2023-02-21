@@ -1,6 +1,27 @@
 import logging
 
 
+class ShellSettings:
+    LOGO = """
+         _.._..,_,_
+        (          )
+         ]~,"-.-~~[
+       .=])' (;  ([     Beer2Beer is a 4b Inf project
+       | ]:: '    [     ITET Leonardo da Vinci, Milazzo (ME)
+       '=]): .)  ([     A working demo of a p2p system!!!
+         |:: '    |
+          ~~----~~
+    
+    CONTRIBUTOR(s):
+    * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
+
+    """
+    USERNAME = None
+    PASSWORD = None
+    DIRECTORY = None
+    SERVER_HOST = "localhost"
+    SERVER_PORT = 8888
+
 class LoggerSettings:
     LOGGER_LEVEL = logging.DEBUG
     LOGGER_HANDLER = logging.StreamHandler()

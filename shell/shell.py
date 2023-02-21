@@ -1,0 +1,133 @@
+import cmd
+from settings import ShellSettings
+
+from command.command_login import CommandLogin
+
+
+class Beer2BeerShell(cmd.Cmd):
+    intro = ShellSettings.LOGO
+    prompt = ">"
+    file = None
+
+    def parse(self, arg):
+        return arg.split()
+
+    def do_show(self, arg):
+        print("USERNAME  => ", ShellSettings.USERNAME)
+        print("PASSWORD  => ", ShellSettings.PASSWORD)
+        print("DIRECTORY => ", ShellSettings.DIRECTORY)
+
+    def help_show(self):
+        help_string = """
+        DESCRIPTION:
+            Show all settings.
+
+        USAGE:
+            >show
+        """
+        print(help_string)
+
+    def do_quit(self, arg):
+        return True
+
+    def help_quit(self):
+        help_string  = """
+        DESCRIPTION:
+            Quit Beer2Beer shell.
+
+        USAGE:
+            >quit
+        """
+        print(help_string)
+
+    def do_set(self, arg):
+        self.parse_set(arg)
+
+    def parse_set(self, arg):
+        sub_cmd, value = self.parse(arg)
+        if sub_cmd in ('user', 'pwd', 'path'):
+            if sub_cmd == 'user':
+                ShellSettings.USERNAME = value
+            elif sub_cmd == 'pwd':
+                ShellSettings.PASSWORD = value
+            elif sub_cmd == 'path':
+                ShellSettings.DIRECTORY = value
+            return True
+        print("ERROR: {} is not recognized, please run >help set".format(sub_cmd))
+        return False
+
+    def help_set(self):
+        help_string = """
+        DESCRIPTION:
+            Set different user's options and client's parameters.
+            Here a list of available options
+            * srv  - set server hostname and port to conect  to
+            * user - set username to  use  in the network
+            * pwd  - set password for your username
+            * path - set dir where you are storing all data you
+                     want to share.
+                     *WARNING*: it must be an absolute path
+
+            See USAGE section for more details
+
+        USAGE:
+            >set srv  <hostanme> <port>
+            >set user <username>
+            >set pwd  <password>
+            >set path <directory>
+        """
+        print(help_string)
+
+    def do_login(self, arg):
+        arg = self.parse(arg)
+        if len(arg) == 2:
+            user = arg[0]
+            pwd = arg[1]
+            print(user, pwd)
+        elif len(arg) == 0:
+            user = ShellSettings.USERNAME
+            pwd = ShellSettings.PASSWORD
+            if user is None or pwd is None:
+                print("ERROR: username or password not set, please run >help set")
+                return False
+        else:
+            print("ERROR: username or password not set, please run >help set")
+            return False
+        login_payload = "{}\n{}\n".format(user, pwd)
+        login_command = CommandLogin(
+                ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
+        response = login_command.execute()
+
+    def help_login(self):
+        help_string = """
+        DESCRIPTION:
+            Enter to the network.
+
+        USAGE:
+            >login
+            >login <username> <password>
+
+        NOTE:
+            You can omit both  <usarname> and  <password>
+            if you have already set them with set command
+        """
+        print(help_string)
+
+    def do_register(self, arg):
+        print(arg)
+
+    def help_register(self):
+        help_string = """
+        DESCRIPTION:
+            Register all shared contents to the network.
+
+        USAGE:
+            >register
+            >register <username> <password> <directory>
+        
+        NOTE:
+            You can omit arguments <username> <password>
+            and <directory> if you have already set them
+            with set command
+        """
+        print(help_string)
