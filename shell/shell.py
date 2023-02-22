@@ -82,7 +82,9 @@ class Beer2BeerShell(cmd.Cmd):
         self.parse_set(arg)
 
     def parse_set(self, arg):
-        sub_cmd, value = self.parse(arg)
+        parsed = self.parse(arg)
+        if len(parsed) <= 1: return
+        sub_cmd, value = parsed
         if sub_cmd in ('user', 'pwd', 'path'):
             if sub_cmd == 'user':
                 ShellSettings.USERNAME = value
