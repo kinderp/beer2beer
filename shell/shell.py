@@ -1,7 +1,11 @@
 import cmd
-from settings import ShellSettings
+import os
+import pickle
 
+from settings import ShellSettings
 from command.command_login import CommandLogin
+
+FILE_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + "settings.bin"
 
 
 class Beer2BeerShell(cmd.Cmd):
@@ -12,10 +16,42 @@ class Beer2BeerShell(cmd.Cmd):
     def parse(self, arg):
         return arg.split()
 
+    def do_save(self, arg):
+        if not os.path.exists(ShellSettings.DIRECTORY_SETTINGS):
+            os.makedirs(ShellSettings.DIRECTORY_SETTINGS)
+        with open(FILE_SETTINGS, "wb") as f:
+            pickle.dump(ShellSettings.dict_from_class(), f)
+
+    def help_save(self):
+        help_string = """
+        DESCRIPTION:
+            Save all settings.
+
+        USAGE:
+            >save
+        """
+        print(help_string)
+
+    def do_load(self, arg):
+        with open(FILE_SETTINGS, "rb") as f:
+            records = pickle.load(f)
+            ShellSettings.load(records)
+
+    def help_load(self):
+        help_string = """
+        DESCRIPTION:
+            Load all settings.
+
+        USAGE:
+            >load
+        """
+        print(help_strin)
+
     def do_show(self, arg):
         print("USERNAME  => ", ShellSettings.USERNAME)
         print("PASSWORD  => ", ShellSettings.PASSWORD)
         print("DIRECTORY => ", ShellSettings.DIRECTORY)
+        print("DIRECTORY SETTINGS => ", ShellSettings.DIRECTORY_SETTINGS)
         print("SERVER HOSTNAME => ", ShellSettings.SERVER_HOST)
         print("SERVER PORT => ", ShellSettings.SERVER_PORT)
 
