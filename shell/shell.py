@@ -16,6 +16,8 @@ class Beer2BeerShell(cmd.Cmd):
         print("USERNAME  => ", ShellSettings.USERNAME)
         print("PASSWORD  => ", ShellSettings.PASSWORD)
         print("DIRECTORY => ", ShellSettings.DIRECTORY)
+        print("SERVER HOSTNAME => ", ShellSettings.SERVER_HOST)
+        print("SERVER PORT => ", ShellSettings.SERVER_PORT)
 
     def help_show(self):
         help_string = """
@@ -80,24 +82,29 @@ class Beer2BeerShell(cmd.Cmd):
 
     def do_login(self, arg):
         arg = self.parse(arg)
-        if len(arg) == 2:
-            user = arg[0]
-            pwd = arg[1]
-            print(user, pwd)
-        elif len(arg) == 0:
-            user = ShellSettings.USERNAME
-            pwd = ShellSettings.PASSWORD
-            if user is None or pwd is None:
-                print("ERROR: username or password not set, please run >help set")
-                return False
-        else:
-            print("ERROR: username or password not set, please run >help set")
-            return False
+        result, user, pwd = self.parse_login(arg)
+        if not result: return False
         login_payload = "{}\n{}\n".format(user, pwd)
         login_command = CommandLogin(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
         response = login_command.execute()
 
+    def parse_login(self, arg):
+        if len(arg) == 2:
+            user = arg[0]
+            pwd = arg[1]
+            return (True, user, pwd)
+        elif len(arg) == 0:
+            user = ShellSettings.USERNAME
+            pwd = ShellSettings.PASSWORD
+            if user is None or pwd is None:
+                print("ERROR: username or password not set, please run >help set")
+                return (False, user, pwd)
+            return (True, user, pwd)
+        else:
+            print("ERROR: username or password not set, please run >help set")
+            return (False, None, None)
+ 
     def help_login(self):
         help_string = """
         DESCRIPTION:
