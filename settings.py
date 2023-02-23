@@ -1,5 +1,48 @@
 import logging
 
+class Null:
+    pass
+
+
+EXCLUDED_KEYS = set(Null.__dict__.keys())
+
+
+class ShellSettings:
+    LOGO = """
+         _.._..,_,_
+        (          )
+         ]~,"-.-~~[
+       .=])' (;  ([     Beer2Beer is a 4b Inf project
+       | ]:: '    [     ITET Leonardo da Vinci, Milazzo (ME)
+       '=]): .)  ([     A working demo of a p2p system!!!
+         |:: '    |
+          ~~----~~
+    
+    CONTRIBUTOR(s):
+    * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
+
+    """
+    USERNAME = None
+    PASSWORD = None
+    DIRECTORY = None
+    DIRECTORY_SETTINGS = ".beer2beer"
+    SERVER_HOST = "localhost"
+    SERVER_PORT = 8888
+
+    @classmethod
+    def load(cls, records):
+        for key,value in records.items():
+            setattr(cls, key, value)
+
+
+    @classmethod
+    def dict_from_class(cls):
+        records = {}
+        for key, value in cls.__dict__.items():
+            if key not in EXCLUDED_KEYS and not hasattr(value, '__func__'):
+                records[key] = value
+        return records
+
 
 class LoggerSettings:
     LOGGER_LEVEL = logging.DEBUG
