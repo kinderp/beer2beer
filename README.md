@@ -80,20 +80,13 @@ Please, see down below table for informations about payload contents of each mes
   peer makes a login call. So  TTL will expire only if a peer does not make a login
   call in 30 days.
   
-  If a peer needs to update its list, it must perform a new registration call (inclu
-  ding its old id in the request). A new fresh id will be released and  the  old one 
-  will be deleted together with the old indexes for the current peer.
+  If a peer needs to update its list, it can perform a update register call sending
+  its id end a new list. A peer can need to send a new registration call (NOT inclu
+  ding its old id in the request) it can be done but the old one will be lost because
+  of TTL in 30 days. A new fresh id will be released and  the  old one  will be deleted
+  together with the old indexes for the current peer.
   ```
   
-  payload response
-  ```
-  LOGIN_OK
-  ```
-  
-  ```
-  LOGIN_KO
-  ```
-
 * Login
   ```
   Before doing any calls to the server or any interactions with other peers, each re-
@@ -128,6 +121,14 @@ Please, see down below table for informations about payload contents of each mes
   2. dimension
   3. sha1
   ```
+  
+* Search
+
+  ```
+  As a reply to a searching call coming from a peer, indexing server must provide at least a couple (ip_peer, port_peer)
+  containing ip_addr and port_addr of the peer in the network that hosts that specific searched filename
+  ```
+
   
 ## About peers
 
