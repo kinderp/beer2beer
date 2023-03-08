@@ -20,7 +20,7 @@ class ShellSettings:
     
     CONTRIBUTOR(s):
     * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
-
+    * INSERT HERE YOUR NAME AND EMAIL !!!
     """
     USERNAME = None
     PASSWORD = None
