@@ -25,6 +25,7 @@ class ShellSettings:
     * Francesco Salerno ( francesco.salerno at davincimilazzo.edu.it)
     * Letizia Benedetta Mostaccio (letiziabenedetta.mostaccio at davincimilazzo.edu.it)
     * Marika Venuto (marika.venuto at davincimilazzo.edu.it)
+    Ruben Puglisi (rubenpuglisi@gmail.com)
     """
     USERNAME = None
     PASSWORD = None
