@@ -23,6 +23,7 @@ class ShellSettings:
     * Antonio Trifirò (antonio.trifiro at davincimilazzo.edu.it)
     * Francesco Collura (francesco.collura at davincimilazzo.edu.it)
     * Francesco Salerno ( francesco.salerno at davincimilazzo.edu.it)
+    * Letizia Benedetta Mostaccio (letiziabenedetta.mostaccio at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
