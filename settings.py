@@ -20,6 +20,7 @@ class ShellSettings:
     
     CONTRIBUTOR(s):
     * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
+    * Davide Mento (davide.mento@davincimilazzo.edu.it)
 
     """
     USERNAME = None
