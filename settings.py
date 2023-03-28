@@ -21,6 +21,7 @@ class ShellSettings:
     CONTRIBUTOR(s):
     * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
     * Antonio Trifirò (antonio.trifiro at davincimilazzo.edu.it)
+    * Francesco Collura (francesco.collura at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
@@ -33,7 +34,6 @@ class ShellSettings:
     def load(cls, records):
         for key,value in records.items():
             setattr(cls, key, value)
-
 
     @classmethod
     def dict_from_class(cls):
