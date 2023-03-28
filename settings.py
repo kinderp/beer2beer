@@ -21,6 +21,7 @@ class ShellSettings:
     CONTRIBUTOR(s):
     * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
     * Antonio Trifirò (antonio.trifiro at davincimilazzo.edu.it)
+    * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
