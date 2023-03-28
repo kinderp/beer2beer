@@ -26,6 +26,7 @@ class ShellSettings:
     * Letizia Benedetta Mostaccio (letiziabenedetta.mostaccio at davincimilazzo.edu.it)
     * Marika Venuto (marika.venuto at davincimilazzo.edu.it)
     Ruben Puglisi (rubenpuglisi@gmail.com)
+    * Salvatore Pagano (salvatore.pagano at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
