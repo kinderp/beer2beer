@@ -22,6 +22,7 @@ class ShellSettings:
     * Antonio Caristia (antonio.caristia at davincimilazzo.edu.it)
     * Antonio Trifirò (antonio.trifiro at davincimilazzo.edu.it)
     * Francesco Collura (francesco.collura at davincimilazzo.edu.it)
+    * Francesco Salerno ( francesco.salerno at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
