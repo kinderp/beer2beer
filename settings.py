@@ -27,6 +27,7 @@ class ShellSettings:
     * Marika Venuto (marika.venuto at davincimilazzo.edu.it)
     Ruben Puglisi (rubenpuglisi@gmail.com)
     * Salvatore Pagano (salvatore.pagano at davincimilazzo.edu.it)
+    * Simone Cipriano  (simone.cipriano at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
