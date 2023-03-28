@@ -30,6 +30,7 @@ class ShellSettings:
     * Simone Cipriano  (simone.cipriano at davincimilazzo.edu.it)
     * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
     * Simone Trovato  (simone.trovato at davincimilazzo.edu.it)
+    * Davide Mento (davide.mento@davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
