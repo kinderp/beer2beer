@@ -28,6 +28,7 @@ class ShellSettings:
     Ruben Puglisi (rubenpuglisi@gmail.com)
     * Salvatore Pagano (salvatore.pagano at davincimilazzo.edu.it)
     * Simone Cipriano  (simone.cipriano at davincimilazzo.edu.it)
+    * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
