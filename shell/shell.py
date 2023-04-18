@@ -176,3 +176,19 @@ class Beer2BeerShell(cmd.Cmd):
             with set command
         """
         print(help_string)
+
+    def help_register_update(self):
+        help_string = """
+        DESCRIPTION:
+            Register update all shared contents to the network.
+
+        USAGE:
+            >register update
+            >register update <username> <password> <directory>
+
+        NOTE:
+            You can omit arguments <username> <password>
+            and <directory> if you have already set them
+            with set command
+        """
+        print(help_string)
