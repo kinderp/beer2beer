@@ -272,3 +272,21 @@ class Beer2BeerShell(cmd.Cmd):
         keep_alive_command = CommandAlive(
         ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, keep_alive_payload)
         response = keep_alive_command.execute()
+    
+    def do_logout(self, arg):
+        arg = self.parse(arg)
+        result, user, pwd = self.parse_logout(arg)
+        if not result: return False
+        logout_payload = "{}\n{}\n".format(user, pwd)
+        logout_command = CommandLogout(
+            ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, logout_payload)
+        response = logout_command.execute()
+
+    def parse_logout(self, arg):
+        user = None
+        pwd = None
+        if len(arg) == 2:
+            return (True, user, pwd)
+        elif user is None and pwd is None:
+            print("ERROR: username and password not set")
+            return (False, None, None)
