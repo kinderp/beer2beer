@@ -221,4 +221,18 @@ class Beer2BeerShell(cmd.Cmd):
                and <directory> if you have already set them
                with set command
            """
+
+    def help_logout(self):
+        help_string = """
+        DESCRIPTION:
+            Logout to the network.
+            
+        USAGE:
+            >logout
+            >logout <username> <password>
+        
+        NOTE:
+            You can omit both  <usarname> and  <password>
+            if you have already set them with set command
+        """
         print(help_string)
