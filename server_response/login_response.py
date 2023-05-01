@@ -2,18 +2,24 @@ from .server_response import ServerResponse
 from message.messages_codes import LOGIN, LOGIN_OK, LOGIN_KO
 from message.messages_factory import MessagesFactory
 
+from server.storage import Storage
 
 class LoginResponse(ServerResponse):
     def __init__(self, message):
         super().__init__(message)
 
-    def reply(args=None):
-        import random
-        login_or_not_login = random.randint(0,99)
-        if login_or_not_login <= 49:
-            # ok login
-            output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
-        else:
-            output_message = MessagesFactory.create(LOGIN_KO, "LOGIN_KO")
-        return output_message
-        
+    def reply(self, args=None):
+        self.message.unpack() # set payload's items
+        # after unpack we should have a ready message
+        # let's get single item
+        username = self.message.username
+        md5pwd = self.message.md5pwd
+        user_id = self.message.id
+        db_response = Storage.get_row(user_id)
+        if db_response:
+            if db_response.username == username and db_response.md5pwd == md5pwd:
+                output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
+            else:
+                output_message = MessagesFactory.create(LOGIN_KO, "LOGIN_KO_BAD_USER_OR_PWD")
+            return output_message
+        return MessagesFactory.create(LOGIN_KO, "LOGIN_KO_ID_NOT_FOUND")

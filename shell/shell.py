@@ -122,7 +122,7 @@ class Beer2BeerShell(cmd.Cmd):
         arg = self.parse(arg)
         result, user, pwd = self.parse_login(arg)
         if not result: return False
-        login_payload = "{}\n{}\n".format(user, pwd)
+        login_payload = "{}\n{}\n{}".format(user, pwd, "1")
         login_command = CommandLogin(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
         response = login_command.execute()

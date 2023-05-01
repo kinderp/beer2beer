@@ -4,6 +4,9 @@ from .message_base import MessageBase
 class MessageLogin(MessageBase):
     def __init__(self, mtype, data):
         super().__init__(mtype, data)
+        self.username = None
+        self.md5pwd = None
+        self.id = None
 
     def set_payload(self):
         # ovveride this method if you need to do
@@ -24,5 +27,13 @@ class MessageLogin(MessageBase):
         return super().pack()
 
     def unpack(self):
-        pass
+        login_tokens = self._data.split()
+        if login_tokens:
+            # TODO: we'd like to check out of index
+            # in case our client is sending  a  bad
+            # formatted inout message (e.g. missing
+            # id or username)
+            self.username = login_tokens[0]
+            self.md5pwd = login_tokens[1]
+            self.id = login_tokens[2]
 
