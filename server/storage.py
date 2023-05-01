@@ -38,7 +38,13 @@ class Storage:
     def save(cls):
         if cls.db:
             cls.db.close()
-        
+
+    @classmethod
+    def get_row(cls, index):
+        if index in cls.db:
+            return cls.db[index]
+        return None
+
     @classmethod
     def add_row(cls, index, row):
         cls.db[index] = row
