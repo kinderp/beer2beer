@@ -7,9 +7,11 @@ from server_response.server_responses_factory import ServerResponsesFactory
 from settings import LoggerSettings
 
 from . import LOGGER
+from .storage import Storage
 
 class Server:
     def __init__(self, host='localhost', port=8888, queue=5, threads=20):
+        Storage.load() # load server DB
         self._host = host
         self._port = port
         self._queue = queue
@@ -46,6 +48,10 @@ class Server:
                     new_session = Session(host=None, port=None, sock=new_sock)
                     e.submit(self.handle, new_session, address)
             except KeyboardInterrupt:
-                pass
+                LOGGER.info("[!] Quit - Closing socket & Saving server cache - {}")
             finally:
                 self._servsock.close()
+                # TODO: we synch our  mem  cache on disk just here
+                #       we'd like to  have a dedicated thread that
+                #       make a sync call at regular time intervals 
+                Storage.save()
