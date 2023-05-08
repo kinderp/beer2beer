@@ -2,9 +2,9 @@ import shelve
 
 from settings import ShellSettings
 
-DB_NAME = "storage.bin"
+DB_NAME = "storage.bin" # filename of our db on the disk
 DB_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + DB_NAME
-
+MAX_USERS = 1000 # n. max of users in this server (cached in mem)
 
 class Peer:
     def __init__(self, username, md5pwd, status, contents_list=[]):
@@ -29,10 +29,12 @@ class Content:
 
 class Storage:
     db = None
+    free_ids = None # ids to be releaded for new users
 
     @classmethod
     def load(cls):
         cls.db = shelve.open(DB_SETTINGS)
+        cls.free_ids = set(range(1, MAX_USERS + 1)) - {int(x) for x in cls.db.keys()}
 
     @classmethod
     def save(cls):

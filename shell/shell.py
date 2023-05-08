@@ -4,6 +4,7 @@ import pickle
 
 from settings import ShellSettings
 from command.command_login import CommandLogin
+from command.command_register import CommandRegister
 
 FILE_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + "settings.bin"
 
@@ -159,7 +160,36 @@ class Beer2BeerShell(cmd.Cmd):
         print(help_string)
 
     def do_register(self, arg):
+        arg = self.parse(arg)
+        result, user, pwd, share_dir = self.parse_register(arg)
+        if not result: return False
+        mock_data = [("a.mp3", "100", "aaa"), ("b.avi", "1000", "09ju")]
+        register_payload = "{}\n{}\n".format(user, pwd)
+        for elem in mock_data:
+            register_payload = register_payload + "{}|{}|{}\n".format(elem[0], elem[1], elem[2])
+        register_command = CommandRegister(
+                ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, register_payload)
+        response = register_command.execute()
         print(arg)
+
+    def parse_register(self, arg):
+        if len(arg) == 3:
+            user = arg[0]
+            pwd = arg[1]
+            share_dir = arg[2]
+            return (True, user, pwd, share_dir)
+        elif len(arg) == 0:
+            user = ShellSettings.USERNAME
+            pwd = ShellSettings.PASSWORD
+            share_dir = ShellSettings.DIRECTORY
+            if user is None or pwd is None or share_dir is None:
+                print("ERROR: username, password or sharing dir not set, please run >help set")
+                return (False, user, pwd, share_dir)
+            return (True, user, pwd, share_dir)
+        else:
+            print("ERROR: username, password or sharing dir not set, please run >help set")
+            return (False, None, None, None)
+ 
 
     def help_register(self):
         help_string = """
