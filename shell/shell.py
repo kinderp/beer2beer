@@ -4,6 +4,7 @@ import pickle
 
 from settings import ShellSettings
 from command.command_login import CommandLogin
+from command.command_logout import CommandLogout
 from command.command_register import CommandRegister
 from command.command_register_update import CommandRegisterUpdate
 from util.util import Util
