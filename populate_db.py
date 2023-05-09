@@ -28,13 +28,13 @@ uno_id = "1"
 username = "uno"
 pwd = "1234"
 contents_list = [c1, c2, c3, c4]
-uno = Peer(username, pwd, contents_list)
+uno = Peer(username, pwd, 0, contents_list)
 
 due_id = "3"
 username = "due"
 pwd = "9876"
 contents_list = [c1, c4]
-due = Peer(username, pwd, contents_list)
+due = Peer(username, pwd, 0, contents_list)
 
 Storage.add_row(uno_id, uno)
 uno_from_db = Storage.get_row(uno_id)
