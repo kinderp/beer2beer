@@ -25,7 +25,7 @@ class ShellSettings:
     * Francesco Salerno ( francesco.salerno at davincimilazzo.edu.it)
     * Letizia Benedetta Mostaccio (letiziabenedetta.mostaccio at davincimilazzo.edu.it)
     * Marika Venuto (marika.venuto at davincimilazzo.edu.it)
-    Ruben Puglisi (rubenpuglisi@gmail.com)
+    * Ruben Puglisi (rubenpuglisi@gmail.com)
     * Salvatore Pagano (salvatore.pagano at davincimilazzo.edu.it)
     * Simone Cipriano  (simone.cipriano at davincimilazzo.edu.it)
     * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
