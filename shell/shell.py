@@ -51,6 +51,7 @@ class Beer2BeerShell(cmd.Cmd):
     def do_show(self, arg):
         print("USERNAME  => ", ShellSettings.USERNAME)
         print("PASSWORD  => ", ShellSettings.PASSWORD)
+        print("USER_ID => ", ShellSettings.USER_ID)
         print("DIRECTORY => ", ShellSettings.DIRECTORY)
         print("DIRECTORY SETTINGS => ", ShellSettings.DIRECTORY_SETTINGS)
         print("SERVER HOSTNAME => ", ShellSettings.SERVER_HOST)
@@ -120,10 +121,13 @@ class Beer2BeerShell(cmd.Cmd):
         print(help_string)
 
     def do_login(self, arg):
+        if not ShellSettings.USER_ID:
+            print("ERROR: id not set, did you make a registration?!")
+            return False
         arg = self.parse(arg)
         result, user, pwd = self.parse_login(arg)
         if not result: return False
-        login_payload = "{}\n{}\n{}".format(user, pwd, "1")
+        login_payload = "{}\n{}\n{}".format(user, pwd, ShellSettings.USER_ID)
         login_command = CommandLogin(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
         response = login_command.execute()
@@ -170,7 +174,6 @@ class Beer2BeerShell(cmd.Cmd):
         register_command = CommandRegister(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, register_payload)
         response = register_command.execute()
-        print(arg)
 
     def parse_register(self, arg):
         if len(arg) == 3:

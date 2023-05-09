@@ -1,6 +1,33 @@
 from .message_base import MessageBase
 from server.storage import Content
 
+
+class MessageRegisterOk(MessageBase):
+    def __init__(self, mtype, data):
+        super().__init__(mtype, data)
+        self.message_response = None
+        self.id = None
+
+    def set_payload(self):
+        super().set_payload()
+
+    def set_header(self):
+        super().set_header()
+    
+    def pack(self):
+        return super().pack()
+
+    def unpack(self):
+        register_tokens = self._data.split()
+        if register_tokens:
+            # TODO: we'd like to check out of index
+            # in case our client is sending  a  bad
+            # formatted input message (e.g. missing
+            # id)
+            self.message_response = register_tokens.pop(0)
+            self.id = register_tokens.pop(0)
+             
+
 class MessageRegister(MessageBase):
     def __init__(self, mtype, data):
         super().__init__(mtype, data)
