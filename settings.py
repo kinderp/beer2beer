@@ -32,6 +32,7 @@ class ShellSettings:
     * Simone Trovato  (simone.trovato at davincimilazzo.edu.it)
     * Davide Mento (davide.mento@davincimilazzo.edu.it)
     * Antonio Cutropia (antonioemanule.cutropia@davincimilazzo.edu.it)
+    * Michael Basile (michael.basile at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
