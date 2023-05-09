@@ -46,7 +46,7 @@ class Beer2BeerShell(cmd.Cmd):
         USAGE:
             >load
         """
-        print(help_strin)
+        print(help_string)
 
     def do_show(self, arg):
         print("USERNAME  => ", ShellSettings.USERNAME)
