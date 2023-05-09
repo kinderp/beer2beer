@@ -254,3 +254,11 @@ class Beer2BeerShell(cmd.Cmd):
             if you have already set them with set command
         """
         print(help_string)
+    def help_keep_alive(self):
+        help_string="""
+        DESCRIPTION:
+           Transmitting a periodic signal to the indexing server can help sustain alive connection and ensure an ongoin presence on the network.
+        USAGE:
+            >keep_alive
+        """
+        print(help_string)
