@@ -31,6 +31,7 @@ class ShellSettings:
     * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
     * Simone Trovato  (simone.trovato at davincimilazzo.edu.it)
     * Davide Mento (davide.mento@davincimilazzo.edu.it)
+    * Antonio Cutropia (antonioemanule.cutropia@davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
