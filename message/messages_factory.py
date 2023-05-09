@@ -10,10 +10,14 @@ from .messages_codes import REGISTER_UPDATE_KO
 from .messages_codes import KEEP_ALIVE
 from .messages_codes import KEEP_ALIVE_OK
 from .messages_codes import KEEP_ALIVE_KO
+from .messages_codes import LOGOUT
+from .messages_codes import LOGOUT_OK
+from .messages_codes import LOGOUT_KO
 from .message_login import MessageLogin
 from .message_register_update import MessageRegisterUpdate
 from .message_register import MessageRegister, MessageRegisterOk
 from .message_alive import MessageAlive
+from .message_logout import MessageLogout
 
 
 class MessagesFactory:
@@ -30,6 +34,9 @@ class MessagesFactory:
         KEEP_ALIVE: MessageAlive,
         KEEP_ALIVE_OK: MessageAlive,
         KEEP_ALIVE_KO: MessageAlive,
+        LOGOUT: MessageLogout,
+        LOGOUT_OK: MessageLogout,
+        LOGOUT_KO: MessageLogout,
     }
 
     @classmethod
