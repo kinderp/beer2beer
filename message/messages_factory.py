@@ -5,7 +5,7 @@ from .messages_codes import REGISTER
 from .messages_codes import REGISTER_OK
 from .messages_codes import REGISTER_KO
 from .message_login import MessageLogin
-from .message_register import MessageRegister
+from .message_register import MessageRegister, MessageRegisterOk
 
 
 class MessagesFactory:
@@ -14,7 +14,7 @@ class MessagesFactory:
         LOGIN_OK: MessageLogin,
         LOGIN_KO: MessageLogin,
         REGISTER: MessageRegister,
-        REGISTER_OK: MessageRegister,
+        REGISTER_OK: MessageRegisterOk,
         REGISTER_KO: MessageRegister,
     }
 

@@ -36,6 +36,7 @@ class ShellSettings:
     """
     USERNAME = None
     PASSWORD = None
+    USER_ID = None
     DIRECTORY = None
     DIRECTORY_SETTINGS = ".beer2beer"
     SERVER_HOST = "localhost"
