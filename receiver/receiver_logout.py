@@ -11,7 +11,7 @@ class ReceiverLogout:
     def logout(self, args = None):
         logout_message = MessagesFactory.create(message_type=LOGOUT, data=self._payload)
         session = Session(self._host,self._port)
-        Session.connect()
-        Session.send_message(logout_message)
-        response = Session.recv_message()
+        session.connect()
+        session.send_message(logout_message)
+        response = session.recv_message()
         return response
