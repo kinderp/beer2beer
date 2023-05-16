@@ -287,7 +287,13 @@ class Beer2BeerShell(cmd.Cmd):
         user = None
         pwd = None
         if len(arg) == 2:
+            user = arg[0]
+            pwd = arg[1]
             return (True, user, pwd)
         elif user is None or pwd is None:
-            print("ERROR: username or password not set")
-            return (False, None, None)
+            user = ShellSettings.USERNAME
+            pwd = ShellSettings.PASSWORD
+            if user is None or pwd is None:
+                print("ERROR: username or password not set")
+                return (False, None, None)
+            return (True, user, pwd)
