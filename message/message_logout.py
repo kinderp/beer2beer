@@ -17,6 +17,7 @@ class MessageLogout(MessageBase):
         return super().pack()
 
     def unpack(self):
-        self.username = None
-        self.md5pwd = None
-        self.id = None
+        tokens = self._data.split("\n")
+        self.username = tokens[0]
+        self.md5pwd = tokens[1]
+        self.id = tokens[2]
