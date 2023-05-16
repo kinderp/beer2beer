@@ -11,8 +11,8 @@ class LogoutResponse(ServerResponse):
         username = self.message.username
         md5pwd = self.message.md5pwd
         user_id = self.message.id
-        if username == None and md5pwd == None and user_id == None:
-            output_message = MessagesFactory.create(LOGOUT_OK, "LOGOUT_OK")
-        else:
+        if username is None or md5pwd is None or user_id is None:
             output_message = MessagesFactory.create(LOGOUT_KO, "LOGOUT_KO")
+        else:
+            output_message = MessagesFactory.create(LOGOUT_OK, "LOGOUT_OK")
         return output_message
