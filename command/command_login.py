@@ -10,6 +10,6 @@ class CommandLogin(Command):
         response = self.__receiver.login()
         # add here some login to check response
         # and return something to the caller
-        pass
+        return response
         
 
