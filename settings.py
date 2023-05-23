@@ -33,6 +33,7 @@ class ShellSettings:
     * Davide Mento (davide.mento@davincimilazzo.edu.it)
     * Antonio Cutropia (antonioemanule.cutropia@davincimilazzo.edu.it)
     * Michael Basile (michael.basile at davincimilazzo.edu.it)
+    * Andrea Isgro (isgro676@gmail.com)
     """
     USERNAME = None
     PASSWORD = None
