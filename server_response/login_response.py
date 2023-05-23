@@ -19,6 +19,9 @@ class LoginResponse(ServerResponse):
         if db_response:
             if db_response.username == username and db_response.md5pwd == md5pwd:
                 output_message = MessagesFactory.create(LOGIN_OK, "LOGIN_OK")
+                current_user = Storage.get_row(str(user_id))
+                current_user.status = 1
+                Storage.add_row(str(user_id), current_user)
             else:
                 output_message = MessagesFactory.create(LOGIN_KO, "LOGIN_KO_BAD_USER_OR_PWD")
             return output_message
