@@ -3,6 +3,7 @@ from os import listdir, stat
 import random
 
 from server.storage import Storage
+from server.storage import Content
 
 
 MAX_USERS = 1000
@@ -19,8 +20,8 @@ class Util:
         list_of_files=listdir(dir_name)
         for elem in list_of_files:
             dim=stat(elem)
-            tmp={}
-            tmp[elem]=dim
+            # TODO add sha1
+            tmp = Content(elem, dim, "...")
             list_of_files.append(tmp)
         return list_of_files
 
