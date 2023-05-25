@@ -19,18 +19,16 @@ class MessageBase(Message):
 
     def set_header(self):
         message_number = self._mtype
-        message_number_in_bytes = bytes([message_number])
-        padding_message_number = message_number_in_bytes + bytes(2 - len(message_number_in_bytes))
+        padding_message_number = message_number.to_bytes(2, byteorder='little')
 
         # We need to send as  first elem of our message the length of
         # message's payload.  This integer (obtained from len() func)
         # must be converted in its byte representation (bytes() func)
-        payload_size_in_bytes = bytes([len(self._payload)])
         # The lenght of the payload is the  first elem in our message
         # and it (in protocol message) is 16bit (2 bytes) so if it is
         # less than 2 bytes (just 1 byte) we need to add 8 zeros bits
         # in other words we have to add padding
-        padding_payload_size = payload_size_in_bytes + bytes(2 - len(payload_size_in_bytes))
+        padding_payload_size = len(self._payload).to_bytes(2, byteorder='little')
         header_in_bytes = padding_payload_size + padding_message_number
         self._header = header_in_bytes
 
