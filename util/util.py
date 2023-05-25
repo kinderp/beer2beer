@@ -17,13 +17,14 @@ class Util:
         return str(Storage.free_ids.pop())
 
     def browse_dir(self, dir_name):
+        results = []
         list_of_files=listdir(dir_name)
         for elem in list_of_files:
-            dim=stat(elem)
+            dim=stat(elem).st_size
             # TODO add sha1
             tmp = Content(elem, dim, "...")
-            list_of_files.append(tmp)
-        return list_of_files
+            results.append(tmp)
+        return results
 
 
 
