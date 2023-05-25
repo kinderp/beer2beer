@@ -2,6 +2,8 @@ from message.messages_factory import MessagesFactory
 
 from . import LOGGER
 
+import socket
+
 
 class BinSession:
     def __init__(self, sock):
