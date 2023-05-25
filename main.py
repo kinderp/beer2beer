@@ -20,11 +20,7 @@ if __name__ == "__main__":
     if args.mode == MODE_SERVER:
         # run here a server instance
         s = Server()
-        s.run()
-    elif args.mode == MODE_PEER:
-        # run here a peer instance
-        p = Peer()
-        p.run()
+        s.run() 
     elif args.mode == MODE_SHELL:
         # run here b2b shell cmd loop
         Beer2BeerShell().cmdloop()
