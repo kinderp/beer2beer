@@ -13,10 +13,11 @@ class Util:
         pass
 
     @classmethod
-    def generate_userid(self):
+    def generate_userid(cls):
         return str(Storage.free_ids.pop())
 
-    def browse_dir(self, dir_name):
+    @classmethod
+    def browse_dir(cls, dir_name):
         results = []
         list_of_files=listdir(dir_name)
         for elem in list_of_files:
