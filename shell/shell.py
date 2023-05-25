@@ -5,6 +5,7 @@ import pickle
 from settings import ShellSettings
 from command.command_login import CommandLogin
 from command.command_register import CommandRegister
+from util.util import Util
 
 FILE_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + "settings.bin"
 
@@ -167,10 +168,10 @@ class Beer2BeerShell(cmd.Cmd):
         arg = self.parse(arg)
         result, user, pwd, share_dir = self.parse_register(arg)
         if not result: return False
-        mock_data = [("a.mp3", "100", "aaa"), ("b.avi", "1000", "09ju")]
+        data = Util.browse_dir(share_dir)
         register_payload = "{}\n{}\n".format(user, pwd)
-        for elem in mock_data:
-            register_payload = register_payload + "{}|{}|{}\n".format(elem[0], elem[1], elem[2])
+        for elem in data:
+            register_payload = register_payload + "{}|{}|{}\n".format(elem.filename, elem.dimension, elem.sha1)
         register_command = CommandRegister(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, register_payload)
         response = register_command.execute()
