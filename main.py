@@ -3,7 +3,6 @@ import argparse
 from server.server import Server
 from peer.peer import Peer
 from shell.shell import Beer2BeerShell
-
 from settings import ShellSettings
 
 MODE_SERVER = "server"
@@ -22,5 +21,8 @@ if __name__ == "__main__":
         s = Server()
         s.run() 
     elif args.mode == MODE_SHELL:
+        # run peer (it's just a server on peer side)
+        p = Peer()
+        p.start()
         # run here b2b shell cmd loop
         Beer2BeerShell().cmdloop()
