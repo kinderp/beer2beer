@@ -26,3 +26,6 @@ if __name__ == "__main__":
         p.start()
         # run here b2b shell cmd loop
         Beer2BeerShell().cmdloop()
+        # after quitting peer's shell we can terminate
+        # our server on server side
+        p.terminate()
