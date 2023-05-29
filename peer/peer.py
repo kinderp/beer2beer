@@ -1,6 +1,6 @@
 import socket
 from concurrent import futures as cf
-
+from multiprocessing import Process
 
 from util.session import BinSession
 from command.command_login import CommandLogin
@@ -9,8 +9,9 @@ from command.command_register import CommandRegister
 from . import LOGGER
 
 
-class Peer:
+class Peer(Process):
     def __init__(self, host='localhost', port=9999, queue=1, threads=2):
+        super().__init__()
         self._host = host # server hostname
         self._port = port # server port number
         self._queue = queue
@@ -19,6 +20,7 @@ class Peer:
         self._servsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._servsock.bind((self._host,self._port))
         self._servsock.listen(self._queue)
+
 
     def handle(self, new_session, address):
         LOGGER.info("[<-] Opened - Session - {} ".format(address))
