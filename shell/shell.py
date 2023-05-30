@@ -5,6 +5,7 @@ import pickle
 from settings import ShellSettings
 from command.command_login import CommandLogin
 from command.command_register import CommandRegister
+from command.command_register_update import CommandRegisterUpdate
 
 FILE_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + "settings.bin"
 
@@ -172,6 +173,19 @@ class Beer2BeerShell(cmd.Cmd):
         response = register_command.execute()
         print(arg)
 
+    def do_register_update(self, arg):
+        arg = self.parse(arg)
+        result, user, pwd, filename, dimension, sha1, share_dir = self.parse_register(arg)
+        if not result: return False
+        mock_data = [("a.mp3", "100", "aaa"), ("b.avi", "1000", "09ju")]
+        register_update_payload = "{}\n{}\n{}\n{}|{}|{}\n".format(user, pwd, id, filename, dimension, sha1)
+        for elem in mock_data:
+            register_update_payload = register_update_payload + "{}|{}|{}\n".format(elem[0], elem[1], elem[2])
+        register_command = CommandRegisterUpdate(
+                ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, register_update_payload)
+        response = register_command.execute()
+        print(arg)
+
     def parse_register(self, arg):
         if len(arg) == 3:
             user = arg[0]
@@ -209,18 +223,19 @@ class Beer2BeerShell(cmd.Cmd):
 
     def help_register_update(self):
         help_string = """
-           DESCRIPTION:
-               Register update all shared contents to the network.
+        DESCRIPTION:
+            Register update all shared contents to the network.
 
-           USAGE:
-               >register update
-               >register update <username> <password> <directory>
-
-           NOTE:
-               You can omit arguments <username> <password>
-               and <directory> if you have already set them
-               with set command
-           """
+        USAGE:
+            >register update
+            >register update <username> <password> <directory>
+        
+        NOTE:
+            You can omit arguments <username> <password>
+            and <directory> if you have already set them
+            with set command
+        """
+        print(help_string)
 
     def help_logout(self):
         help_string = """
