@@ -1,4 +1,4 @@
-from message.messages_codes import REGISTER
+from message.messages_codes import REGISTER_UPDATE
 from message.messages_factory import MessagesFactory
 from util.session import Session
 
@@ -11,7 +11,7 @@ class ReceiverRegisterUpdate:
 
     def register_update(self, args=None):
         register_update_message = MessagesFactory.create(
-                message_type=REGISTER,
+                message_type=REGISTER_UPDATE,
                 data=self._payload
         )
         session = Session(self._host, self._port)
