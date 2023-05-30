@@ -25,15 +25,18 @@ class ShellSettings:
     * Francesco Salerno ( francesco.salerno at davincimilazzo.edu.it)
     * Letizia Benedetta Mostaccio (letiziabenedetta.mostaccio at davincimilazzo.edu.it)
     * Marika Venuto (marika.venuto at davincimilazzo.edu.it)
-    Ruben Puglisi (rubenpuglisi@gmail.com)
+    * Ruben Puglisi (rubenpuglisi@gmail.com)
     * Salvatore Pagano (salvatore.pagano at davincimilazzo.edu.it)
     * Simone Cipriano  (simone.cipriano at davincimilazzo.edu.it)
     * Simone Romanzo (simone.romanzo at git adddavincimilzzo.edu.it)
     * Simone Trovato  (simone.trovato at davincimilazzo.edu.it)
     * Davide Mento (davide.mento@davincimilazzo.edu.it)
+    * Antonio Cutropia (antonioemanule.cutropia@davincimilazzo.edu.it)
+    * Michael Basile (michael.basile at davincimilazzo.edu.it)
     """
     USERNAME = None
     PASSWORD = None
+    USER_ID = None
     DIRECTORY = None
     DIRECTORY_SETTINGS = ".beer2beer"
     SERVER_HOST = "localhost"

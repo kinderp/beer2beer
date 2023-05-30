@@ -16,5 +16,7 @@ class RegisterResponse(ServerResponse):
         username = self.message.username
         md5pwd = self.message.md5pwd
         contents_list = self.message.contents_list
-        Storage.add_row(Util.generate_userid(), Peer(username, md5pwd, 0, contents_list))
-        return MessagesFactory.create(REGISTER_OK, "REGISTER_OK")
+        user_id = Util.generate_userid()
+        Storage.add_row(user_id, Peer(username, md5pwd, 0, contents_list))
+        payload = "{}\n{}".format("REGISTER_OK", str(user_id))
+        return MessagesFactory.create(REGISTER_OK, payload)
