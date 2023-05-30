@@ -257,7 +257,7 @@ class Beer2BeerShell(cmd.Cmd):
         """
         print(help_string)
 
-    def help_keep_alive(self):
+    def help_keepalive(self):
         help_string="""
         DESCRIPTION:
            Transmitting a periodic signal to the indexing server can help sustain alive connection and ensure an ongoin presence on the network.
@@ -266,7 +266,7 @@ class Beer2BeerShell(cmd.Cmd):
         """
         print(help_string)
 
-    def do_keepalive(self):
+    def do_keepalive(self, arg):
         if not ShellSettings.USER_ID: return False
         keep_alive_payload = "{}\n".format(ShellSettings.USER_ID)
         keep_alive_command = CommandAlive(
