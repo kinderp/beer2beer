@@ -256,6 +256,7 @@ class Beer2BeerShell(cmd.Cmd):
             if you have already set them with set command
         """
         print(help_string)
+
     def help_keep_alive(self):
         help_string="""
         DESCRIPTION:
@@ -266,14 +267,8 @@ class Beer2BeerShell(cmd.Cmd):
         print(help_string)
 
     def do_keepalive(self):
-            keep_alive_payload = "{}\n".format(id)
-           """arg = self.parse()"""
-            result,id = self.parse_alive()
-            if not result: return False
-
-            alive_payload = "{}\n".format(id)
-
-            keep_alive_command = CommandAlive(
-            ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, alive_payload)
-            response = keep_alive_command.execute()
-            print(id)
+        if not ShellSettings.USER_ID: return False
+        keep_alive_payload = "{}\n".format(ShellSettings.USER_ID)
+        keep_alive_command = CommandAlive(
+        ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, keep_alive_payload)
+        response = keep_alive_command.execute()
