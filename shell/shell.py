@@ -1,6 +1,7 @@
 import cmd
 import os
 import pickle
+import socket
 
 from settings import ShellSettings
 from command.command_login import CommandLogin
@@ -131,6 +132,10 @@ class Beer2BeerShell(cmd.Cmd):
         login_command = CommandLogin(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
         response = login_command.execute()
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        print("hostname: ", s.getsockname()[0])
+        s.close()
 
     def parse_login(self, arg):
         if len(arg) == 2:
