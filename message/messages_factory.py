@@ -7,6 +7,7 @@ from .messages_codes import REGISTER_OK
 from .messages_codes import REGISTER_KO
 from .messages_codes import REGISTER_UPDATE_OK
 from .messages_codes import REGISTER_UPDATE_KO
+from .messages_codes import KEEP_ALIVE
 from .messages_codes import KEEP_ALIVE_OK
 from .messages_codes import KEEP_ALIVE_KO
 from .message_login import MessageLogin
@@ -26,6 +27,7 @@ class MessagesFactory:
         REGISTER_KO: MessageRegister,
         REGISTER_UPDATE_OK: MessageRegisterUpdate,
         REGISTER_UPDATE_KO: MessageRegisterUpdate,
+        KEEP_ALIVE: MessageAlive,
         KEEP_ALIVE_OK: MessageAlive,
         KEEP_ALIVE_KO: MessageAlive,
     }
