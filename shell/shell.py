@@ -7,6 +7,8 @@ from command.command_login import CommandLogin
 from command.command_register import CommandRegister
 from command.command_register_update import CommandRegisterUpdate
 from util.util import Util
+from command.command_keepalive import  CommandAlive
+
 
 FILE_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + "settings.bin"
 
@@ -254,3 +256,24 @@ class Beer2BeerShell(cmd.Cmd):
             if you have already set them with set command
         """
         print(help_string)
+    def help_keep_alive(self):
+        help_string="""
+        DESCRIPTION:
+           Transmitting a periodic signal to the indexing server can help sustain alive connection and ensure an ongoin presence on the network.
+        USAGE:
+            >keep_alive
+        """
+        print(help_string)
+
+    def do_keepalive(self):
+            keep_alive_payload = "{}\n".format(id)
+           """arg = self.parse()"""
+            result,id = self.parse_alive()
+            if not result: return False
+
+            alive_payload = "{}\n".format(id)
+
+            keep_alive_command = CommandAlive(
+            ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, alive_payload)
+            response = keep_alive_command.execute()
+            print(id)
