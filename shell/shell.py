@@ -179,16 +179,15 @@ class Beer2BeerShell(cmd.Cmd):
 
     def do_register_update(self, arg):
         arg = self.parse(arg)
-        result, user, pwd, filename, dimension, sha1, share_dir = self.parse_register(arg)
+        result, user, pwd, share_dir = self.parse_register(arg)
         if not result: return False
-        mock_data = [("a.mp3", "100", "aaa"), ("b.avi", "1000", "09ju")]
-        register_update_payload = "{}\n{}\n{}\n{}|{}|{}\n".format(user, pwd, id, filename, dimension, sha1)
-        for elem in mock_data:
-            register_update_payload = register_update_payload + "{}|{}|{}\n".format(elem[0], elem[1], elem[2])
-        register_command = CommandRegisterUpdate(
+        data = Util.browse_dir(share_dir)
+        register_update_payload = "{}\n{}\n{}\n".format(user, pwd, ShellSettings.USER_ID)
+        for elem in data:
+            register_update_payload = register_update_payload + "{}|{}|{}\n".format(elem.filename, elem.dimension, elem.sha1)
+        register_update_command = CommandRegisterUpdate(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, register_update_payload)
-        response = register_command.execute()
-        print(arg)
+        response = register_update_command.execute()
 
     def parse_register(self, arg):
         if len(arg) == 3:

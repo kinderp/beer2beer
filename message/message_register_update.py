@@ -7,6 +7,7 @@ class MessageRegisterUpdate(MessageBase):
         super().__init__(mtype, data)
         self.username = None
         self.md5pwd = None
+        self.user_id = None
         self.contents_list = []
 
     def set_payload(self):
