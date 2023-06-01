@@ -7,11 +7,15 @@ DB_SETTINGS = ShellSettings.DIRECTORY_SETTINGS + "/" + DB_NAME
 MAX_USERS = 1000 # n. max of users in this server (cached in mem)
 
 class Peer:
-    def __init__(self, username, md5pwd, status, contents_list=[]):
+    def __init__(self, username, md5pwd, status, contents_list=[], ip=None):
         self.username = username
+        self.ip = ip
         self.md5pwd = md5pwd
         self.status = status
         self.contents_list = contents_list
+
+    def set_ip(self, ip)
+        self.ip = ip
 
     def set_status(self, status):
         self.status = status
