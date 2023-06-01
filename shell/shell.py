@@ -4,6 +4,7 @@ import pickle
 
 from settings import ShellSettings
 from command.command_login import CommandLogin
+from command.command_logout import CommandLogout
 from command.command_register import CommandRegister
 from command.command_register_update import CommandRegisterUpdate
 from util.util import Util
@@ -272,3 +273,27 @@ class Beer2BeerShell(cmd.Cmd):
         keep_alive_command = CommandAlive(
         ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, keep_alive_payload)
         response = keep_alive_command.execute()
+    
+    def do_logout(self, arg):
+        arg = self.parse(arg)
+        result, user, pwd = self.parse_logout(arg)
+        if not result: return False
+        logout_payload = "{}\n{}\n".format(user, pwd)
+        logout_command = CommandLogout(
+            ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, logout_payload)
+        response = logout_command.execute()
+
+    def parse_logout(self, arg):
+        user = None
+        pwd = None
+        if len(arg) == 2:
+            user = arg[0]
+            pwd = arg[1]
+            return (True, user, pwd)
+        elif user is None or pwd is None:
+            user = ShellSettings.USERNAME
+            pwd = ShellSettings.PASSWORD
+            if user is None or pwd is None:
+                print("ERROR: username or password not set")
+                return (False, None, None)
+            return (True, user, pwd)
