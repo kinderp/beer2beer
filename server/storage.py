@@ -14,7 +14,7 @@ class Peer:
         self.status = status
         self.contents_list = contents_list
 
-    def set_ip(self, ip)
+    def set_ip(self, ip):
         self.ip = ip
 
     def set_status(self, status):
