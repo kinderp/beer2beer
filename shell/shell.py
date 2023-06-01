@@ -1,6 +1,7 @@
 import cmd
 import os
 import pickle
+import socket
 
 from settings import ShellSettings
 from command.command_login import CommandLogin
@@ -125,6 +126,14 @@ class Beer2BeerShell(cmd.Cmd):
         """
         print(help_string)
 
+    def get_peer_ip(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        print("hostname: ", ip)
+        return ip
+
     def do_login(self, arg):
         if not ShellSettings.USER_ID:
             print("ERROR: id not set, did you make a registration?!")
@@ -132,7 +141,8 @@ class Beer2BeerShell(cmd.Cmd):
         arg = self.parse(arg)
         result, user, pwd = self.parse_login(arg)
         if not result: return False
-        login_payload = "{}\n{}\n{}".format(user, pwd, ShellSettings.USER_ID)
+        ip = self.get_peer_ip()
+        login_payload = "{}\n{}\n{}\n{}\n".format(user, pwd, ShellSettings.USER_ID, ip)
         login_command = CommandLogin(
                 ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, login_payload)
         response = login_command.execute()

@@ -7,6 +7,7 @@ class MessageLogin(MessageBase):
         self.username = None
         self.md5pwd = None
         self.id = None
+        self.ip = None
 
     def set_payload(self):
         # ovveride this method if you need to do
@@ -36,4 +37,5 @@ class MessageLogin(MessageBase):
             self.username = login_tokens[0]
             self.md5pwd = login_tokens[1]
             self.id = login_tokens[2]
+            self.ip = login_tokens[3]
 
