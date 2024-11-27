@@ -1,5 +1,5 @@
 import shelve
-
+from pathlib import Path
 from settings import ShellSettings
 
 DB_NAME = "storage.bin" # filename of our db on the disk
@@ -37,6 +37,8 @@ class Storage:
 
     @classmethod
     def load(cls):
+        myfile = Path(DB_SETTINGS)
+        myfile.parent.mkdir(exist_ok=True, parents=True)
         cls.db = shelve.open(DB_SETTINGS)
         cls.free_ids = set(range(1, MAX_USERS + 1)) - {int(x) for x in cls.db.keys()}
 
