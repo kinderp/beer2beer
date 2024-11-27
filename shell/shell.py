@@ -93,13 +93,17 @@ class Beer2BeerShell(cmd.Cmd):
         parsed = self.parse(arg)
         if len(parsed) <= 1: return
         sub_cmd, value = parsed
-        if sub_cmd in ('user', 'pwd', 'path'):
+        if sub_cmd in ('user', 'pwd', 'path', 'host', 'port'):
             if sub_cmd == 'user':
                 ShellSettings.USERNAME = value
             elif sub_cmd == 'pwd':
                 ShellSettings.PASSWORD = value
             elif sub_cmd == 'path':
                 ShellSettings.DIRECTORY = value
+            elif sub_cmd == 'host':
+                ShellSettings.SERVER_HOST = value
+            elif sub_cmd == 'port':
+                ShellSettings.SERVER_PORT = value
             return True
         print("ERROR: {} is not recognized, please run >help set".format(sub_cmd))
         return False
@@ -109,7 +113,8 @@ class Beer2BeerShell(cmd.Cmd):
         DESCRIPTION:
             Set different user's options and client's parameters.
             Here a list of available options
-            * srv  - set server hostname and port to conect  to
+            * host - set server hostname to conect  to
+            * port - set server port to connect to
             * user - set username to  use  in the network
             * pwd  - set password for your username
             * path - set dir where you are storing all data you
@@ -119,7 +124,8 @@ class Beer2BeerShell(cmd.Cmd):
             See USAGE section for more details
 
         USAGE:
-            >set srv  <hostanme> <port>
+            >set host <hostanme>
+            >set port <port>
             >set user <username>
             >set pwd  <password>
             >set path <directory>
