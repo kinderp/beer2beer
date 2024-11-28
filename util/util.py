@@ -23,7 +23,7 @@ class Util:
         list_of_files=listdir(dir_name)
         for elem in list_of_files:
             if path.isdir(Path(dir_name, elem)): continue
-            dim=stat(elem).st_size
+            dim=stat(Path(dir_name, elem)).st_size
             sha1 = cls.sha1sum(dir_name, elem)
             tmp = Content(elem, dim, sha1)
             results.append(tmp)

@@ -72,7 +72,7 @@ class BinSession:
 class Session:
     def __init__(self, host, port, sock=None):
         self._host = host
-        self._port = port
+        self._port = int(port)
         if sock is None:
             self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self._sock.connect((self._host, self._port))
