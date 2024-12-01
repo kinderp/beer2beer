@@ -41,3 +41,32 @@ class Util:
                     break
                 sha1.update(data)
         return sha1.hexdigest()
+
+    @classmethod
+    def find_search_string(cls, search_string):
+        results = {}
+        words = search_string.split()
+        from server.storage import Storage
+        for uid, peer in Storage.db.items():
+               for content in peer.contents_list:
+                  value = 0 
+                  score = sum([content.filename.count(w) for w in words])
+                  tmp = {
+                    'uid': uid,
+                    'username': peer.username,
+                    'ip': peer.ip,
+                    'filename': content.filename,
+                    'dimension': content.dimension,
+                    'sha1': content.sha1,
+                  }
+                  if score == 0: continue
+                  if score in results:
+                      results[score].append('{filename}\n{dimension}\n{sha1}\n{username}\n{uid}\n{ip}\n'.format(**tmp))
+                  else:
+                      results[score] = ['{filename}\n{dimension}\n{sha1}\n{username}\n{uid}\n{ip}\n'.format(**tmp)]
+        data = []
+        for list_position in dict(sorted(results.items())).values():
+             for l in list_position:
+                 data.append(l)
+        #return "".join(dict(sorted(results.items())).values())
+        return "".join(data)
