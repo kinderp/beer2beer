@@ -1,9 +1,11 @@
 from message.messages_codes import LOGIN
 from message.messages_codes import LOGOUT
 from message.messages_codes import REGISTER
+from message.messages_codes import SEARCH_FILE
 from .login_response import LoginResponse
 from .register_response import RegisterResponse
 from .logout_response import LogoutResponse
+from .search_response import SearchResponse
 
 
 class ServerResponsesFactory:
@@ -11,6 +13,7 @@ class ServerResponsesFactory:
         LOGIN : LoginResponse,
         LOGOUT: LogoutResponse,
         REGISTER : RegisterResponse,
+        SEARCH_FILE: SearchResponse,
     }
 
     @classmethod

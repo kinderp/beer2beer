@@ -7,6 +7,9 @@ from .messages_codes import REGISTER_OK
 from .messages_codes import REGISTER_KO
 from .messages_codes import REGISTER_UPDATE_OK
 from .messages_codes import REGISTER_UPDATE_KO
+from .messages_codes import SEARCH_FILE
+from .messages_codes import SEARCH_FILE_OK
+from .messages_codes import SEARCH_FILE_KO
 from .messages_codes import KEEP_ALIVE
 from .messages_codes import KEEP_ALIVE_OK
 from .messages_codes import KEEP_ALIVE_KO
@@ -17,6 +20,7 @@ from .message_login import MessageLogin
 from .message_register_update import MessageRegisterUpdate
 from .message_register import MessageRegister, MessageRegisterOk
 from .message_alive import MessageAlive
+from .message_search import MessageSearch
 from .message_logout import MessageLogout
 
 
@@ -34,6 +38,9 @@ class MessagesFactory:
         KEEP_ALIVE: MessageAlive,
         KEEP_ALIVE_OK: MessageAlive,
         KEEP_ALIVE_KO: MessageAlive,
+	SEARCH_FILE: MessageSearch,
+	SEARCH_FILE_OK: MessageSearch,
+	SEARCH_FILE_KO: MessageSearch,
         LOGOUT: MessageLogout,
         LOGOUT_OK: MessageLogout,
         LOGOUT_KO: MessageLogout,

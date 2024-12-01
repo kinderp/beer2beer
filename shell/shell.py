@@ -7,6 +7,7 @@ from settings import ShellSettings
 from command.command_login import CommandLogin
 from command.command_logout import CommandLogout
 from command.command_register import CommandRegister
+from command.command_search import CommandSearch
 from command.command_register_update import CommandRegisterUpdate
 from util.util import Util
 from command.command_keepalive import  CommandAlive
@@ -288,7 +289,23 @@ class Beer2BeerShell(cmd.Cmd):
         keep_alive_command = CommandAlive(
         ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, keep_alive_payload)
         response = keep_alive_command.execute()
-    
+   
+    def do_search(self, arg): 
+        search_payload = "{}\n".format(arg)
+        # TODO: CommandSearch
+        search_command = CommandSearch(
+        ShellSettings.SERVER_HOST, ShellSettings.SERVER_PORT, search_payload)
+        response = search_command.execute()
+
+    def help_search(self):
+        help_string="""
+        DESCRIPTION:
+           Search something on the network.
+        USAGE:
+            >search Learning Python.pdf
+        """
+        print(help_string)
+
     def do_logout(self, arg):
         arg = self.parse(arg)
         result, user, pwd = self.parse_logout(arg)
