@@ -169,6 +169,23 @@ Please, see down below table for informations about payload contents of each mes
   ```
 
 * Search
+  ```
+  filename
+  dimension
+  sha1
+  username
+  user_id
+  peer_ip
+  peer_port
+  filename
+  dimension
+  sha1
+  username
+  user_id
+  peer_ip
+  peer_port
+  ...
+  ```
 
 * Download
 
