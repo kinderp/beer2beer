@@ -63,6 +63,7 @@ class Beer2BeerShell(cmd.Cmd):
         print("DIRECTORY SETTINGS => ", ShellSettings.DIRECTORY_SETTINGS)
         print("SERVER HOSTNAME => ", ShellSettings.SERVER_HOST)
         print("SERVER PORT => ", ShellSettings.SERVER_PORT)
+        print("PEER PORT => ", ShellSettings.PEER_PORT)
 
     def help_show(self):
         help_string = """
@@ -75,6 +76,7 @@ class Beer2BeerShell(cmd.Cmd):
         print(help_string)
 
     def do_quit(self, arg):
+        self.do_save(None)
         return True
 
     def help_quit(self):
@@ -94,7 +96,7 @@ class Beer2BeerShell(cmd.Cmd):
         parsed = self.parse(arg)
         if len(parsed) <= 1: return
         sub_cmd, value = parsed
-        if sub_cmd in ('user', 'pwd', 'path', 'host', 'port'):
+        if sub_cmd in ('user', 'pwd', 'path', 'host', 'port', 'pport'):
             if sub_cmd == 'user':
                 ShellSettings.USERNAME = value
             elif sub_cmd == 'pwd':
@@ -105,6 +107,8 @@ class Beer2BeerShell(cmd.Cmd):
                 ShellSettings.SERVER_HOST = value
             elif sub_cmd == 'port':
                 ShellSettings.SERVER_PORT = value
+            elif sub_cmd == 'pport':
+                ShellSettings.PEER_PORT = value
             return True
         print("ERROR: {} is not recognized, please run >help set".format(sub_cmd))
         return False
@@ -114,22 +118,24 @@ class Beer2BeerShell(cmd.Cmd):
         DESCRIPTION:
             Set different user's options and client's parameters.
             Here a list of available options
-            * host - set server hostname to conect  to
-            * port - set server port to connect to
-            * user - set username to  use  in the network
-            * pwd  - set password for your username
-            * path - set dir where you are storing all data you
+            * host  - set server hostname to conect  to
+            * port  - set server port to connect to
+            * pport - set peer server port to connect to 
+            * user  - set username to  use  in the network
+            * pwd   - set password for your username
+            * path  - set dir where you are storing all data you
                      want to share.
                      *WARNING*: it must be an absolute path
 
             See USAGE section for more details
 
         USAGE:
-            >set host <hostanme>
-            >set port <port>
-            >set user <username>
-            >set pwd  <password>
-            >set path <directory>
+            >set host  <hostanme>
+            >set port  <port>
+            >set pport <peer_port>
+            >set user  <username>
+            >set pwd   <password>
+            >set path  <directory>
         """
         print(help_string)
 

@@ -42,6 +42,7 @@ class ShellSettings:
     DIRECTORY_SETTINGS = ".beer2beer"
     SERVER_HOST = "localhost"
     SERVER_PORT = 8888
+    PEER_PORT = 9999
 
     @classmethod
     def load(cls, records):
