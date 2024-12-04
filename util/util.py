@@ -45,12 +45,13 @@ class Util:
     @classmethod
     def find_search_string(cls, search_string):
         results = {}
-        words = search_string.split()
+        words = [w.lower() for w in search_string.split()]
         from server.storage import Storage
         for uid, peer in Storage.db.items():
                for content in peer.contents_list:
                   value = 0 
-                  score = sum([content.filename.count(w) for w in words])
+                  filename = content.filename.lower()
+                  score = sum([filename.count(w) for w in words])
                   tmp = {
                     'uid': uid,
                     'username': peer.username,
