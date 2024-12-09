@@ -29,7 +29,7 @@ class MessageRegisterUpdate(MessageBase):
         return super().pack()
 
     def unpack(self):
-        register_tokens = self._data.split()
+        register_tokens = self._data.split("\n")
         if register_tokens:
             # TODO: we'd like to check out of index
             # in case our client is sending  a  bad
@@ -37,9 +37,11 @@ class MessageRegisterUpdate(MessageBase):
             # id or username)
             self.username = register_tokens.pop(0)
             self.md5pwd = register_tokens.pop(0)
+            self.user_id = register_tokens.pop(0)
             for content in register_tokens:
                 content_tokens = content.split("|")
-                filename, dimension, sha1 = (content_tokens[0], content_tokens[1], content_tokens[2])
-                self.contents_list.append(Content(filename, dimension, sha1))
+                if len(content_tokens) == 3:
+                   filename, dimension, sha1 = (content_tokens[0], content_tokens[1], content_tokens[2])
+                   self.contents_list.append(Content(filename, dimension, sha1))
 
 

@@ -10,6 +10,6 @@ class CommandRegisterUpdate(Command):
         response = self.__receiver.register_update()
         # add here some login to check response
         # and return something to the caller
-        pass
+        return response
 
 

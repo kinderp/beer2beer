@@ -252,7 +252,11 @@ class Beer2BeerShell(cmd.Cmd):
     def help_register_update(self):
         help_string = """
         DESCRIPTION:
-            Register update all shared contents to the network.
+            Update all shared contents to the network.
+            The only differences between register and
+            register_update is that the latter do not
+            ask a new user_id but just updates user's
+            contents on server side.
 
         USAGE:
             >register update
